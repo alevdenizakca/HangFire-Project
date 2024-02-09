@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+    <section class="row" aria-labelledby="aspnetTitle">
+        <h1 id="title">ASP.NET</h1>
+        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
+    </section>
+
+    <div class="row">
+        <section class="col-md-6" aria-labelledby="gettingStartedTitle">
+            <label for="startDate">Başlangıç Zamanı:</label>
+            <input type="datetime-local" id="meeting-time" name="startDate" min="@DateTime.Now.AddMonths(-3).ToString("yyyy-MM-ddTHH:mm")" required>
+        </section>
+        <section class="col-md-6" aria-labelledby="librariesTitle">
+            <label for="endDate">Bitiş Tarihi:</label>
+            <input type="datetime-local" id="meeting-time" name="endDate" min="@DateTime.Now.AddMonths(-3).AddDays(1).ToString("yyyy-MM-ddTHH:mm")" max="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" required>
+        </section>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+
+
+    </div>
+</main>
+
+<script>
+    $(function () {
+        $(".datepicker").datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-100:+0",
+            maxDate: '0' // Bugün ve sonrasını seçilemez yapar
+        });
+
+        $("#startDate").on("change", function () {
+            var selectedStartDate = $("#startDate").datepicker("getDate");
+            $("#endDate").datepicker("option", "minDate", selectedStartDate);
+        });
+
+        $("#endDate").on("change", function () {
+            var selectedEndDate = $("#endDate").datepicker("getDate");
+            $("#startDate").datepicker("option", "maxDate", selectedEndDate);
+        });
+    });
+</script>
