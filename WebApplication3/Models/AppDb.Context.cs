@@ -49,7 +49,6 @@ namespace WebApplication3.Models
         public virtual DbSet<LocationLevelNames> LocationLevelNames { get; set; }
         public virtual DbSet<LocationParameters> LocationParameters { get; set; }
         public virtual DbSet<Logger> Logger { get; set; }
-        public virtual DbSet<MarketPlaceExportOrderHeader> MarketPlaceExportOrderHeader { get; set; }
         public virtual DbSet<MarketPlaceExportOrderLine> MarketPlaceExportOrderLine { get; set; }
         public virtual DbSet<MarketPlaceExportOrderPackageHistory> MarketPlaceExportOrderPackageHistory { get; set; }
         public virtual DbSet<NebimParameters> NebimParameters { get; set; }
@@ -81,7 +80,6 @@ namespace WebApplication3.Models
         public virtual DbSet<TransactionType> TransactionType { get; set; }
         public virtual DbSet<TransType> TransType { get; set; }
         public virtual DbSet<UserProductGroups> UserProductGroups { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Vehicle> Vehicle { get; set; }
         public virtual DbSet<WarehouseLocationDefinition> WarehouseLocationDefinition { get; set; }
         public virtual DbSet<WarehouseLocationERP> WarehouseLocationERP { get; set; }
@@ -100,6 +98,8 @@ namespace WebApplication3.Models
         public virtual DbSet<vw_WarehouseLocationWithProduct> vw_WarehouseLocationWithProduct { get; set; }
         public virtual DbSet<ReportParameters> ReportParameters { get; set; }
         public virtual DbSet<ReportQueries> ReportQueries { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<MarketPlaceExportOrderHeader> MarketPlaceExportOrderHeader { get; set; }
     
         public virtual ObjectResult<sp_GetWarehouseLocationID_Result> sp_GetWarehouseLocationID(string locationCode)
         {

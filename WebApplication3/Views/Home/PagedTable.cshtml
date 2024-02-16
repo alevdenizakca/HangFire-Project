@@ -1,0 +1,199 @@
+﻿@using WebApplication3.Models
+@using WebApplication3.Models.ApiReturnTypes
+@using X.PagedList
+@using X.PagedList.Mvc
+@using Newtonsoft.Json
+@model IPagedList<WebApplication3.Models.ApiReturnTypes.GetAllOrders.ShipmentContent>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+<main class="container">
+    <section class="row mt-5" aria-labelledby="aspnetTitle">
+        <p class="lead">Tarih seçimi yapın</p>
+    </section>
+
+    <form method="post" action="/Home/Index">
+        <div class="row d-flex justify-content-between">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="startDate">Başlangıç Tarihi:</label>
+                    <input type="datetime-local" class="form-control" id="startDate" name="startDate" min="@DateTime.Now.AddMonths(-3).ToString("yyyy-MM-ddTHH:mm")" required>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="endDate">Bitiş Tarihi:</label>
+                    <input type="datetime-local" class="form-control" id="endDate" name="endDate" min="@DateTime.Now.AddMonths(-3).AddDays(1).ToString("yyyy-MM-ddTHH:mm")" max="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" required>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <br />
+                    <div class="d-flex justify-content-between" style="margin-block:8px">
+                        <input id="getir" type="submit" class="btn btn-primary" value="Getir">
+                        <input id="autoExport" style="margin-left: auto" type="submit" class="btn btn-primary" value="Otomatik Aktarımı Başlat">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form method="post" action="/Home/PagedTable">
+        <div>
+            <div>
+                @if (Model != null && Model.Any())
+                {
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Seç</th>
+                                        <th>Sipariş Numarası</th>
+                                        <th>Müşteri ID</th>
+                                        <th>Müşteri Adı</th>
+                                        <th>Müşteri Soyadı</th>
+                                        <th>Müşteri E-Posta</th>
+                                        <th>TC Numarası</th>
+                                        <th>Durum</th>
+                                        <th>Kargo Takip Numarası</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            @{
+                                                if (Request.Cookies["selectedOrders"] != null)
+                                                {
+
+                                                    if (!string.IsNullOrEmpty(Request.Cookies["selectedOrders"].Value))
+                                                    {
+
+                                                        List<string> selectedOrdersList = JsonConvert.DeserializeObject<List<string>>(Request.Cookies["selectedOrders"].Value);
+                                                        if (selectedOrdersList.Contains(item.OrderNumber))
+                                                        {
+                                                                                        <td><input name="selectedOrders" class="form-check-input" type="checkbox" value="@item.OrderNumber" style="margin-left: auto" checked></td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td><input name="selectedOrders" class="form-check-input" type="checkbox" value="@item.OrderNumber" style="margin-left: auto"></td>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <td><input name="selectedOrders" class="form-check-input" type="checkbox" value="@item.OrderNumber" style="margin-left: auto"></td>
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    <td><input name="selectedOrders" class="form-check-input" type="checkbox" value="@item.OrderNumber" style="margin-left: auto"></td>
+                                                }
+                                            }
+
+
+
+                                            <td>@item.OrderNumber</td>
+                                            <td>@item.CustomerId</td>
+                                            <td>@item.CustomerFirstName</td>
+                                            <td>@item.CustomerLastName</td>
+                                            <td>@item.CustomerEmail</td>
+                                            <td>@item.TcIdentityNumber</td>
+                                            <td>@item.ShipmentPackageStatus</td>
+                                            <td>@item.CargoTrackingNumber</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-between">
+                                <input id="getir" type="submit" class="btn btn-primary ml-auto" value="Servisi Çalıştır" style="visibility:hidden;">
+                                <div id="paginationContainer">
+                                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("PagedTable", new { page }), new X.PagedList.Web.Common.PagedListRenderOptionsBase
+                                    {
+                                        LiElementClasses = new List<string> { "page-link" }
+                                    })
+                                </div>
+                                <input id="startService" type="submit" style="height:36px;" class="btn btn-primary ml-auto" value="Servisi Çalıştır">
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </form>
+</main>
+<script>
+    // Sayfa yüklendiğinde cookie'den seçilenOrders'ı al ve sayfa üzerinde işlemleri gerçekleştir
+    $(document).ready(function () {
+        var selectedOrders = getCookie('selectedOrders');
+        if (selectedOrders) {
+            selectedOrders = JSON.parse(selectedOrders);
+            // selectedOrders ile yapılacak işlemler buraya yazılabilir
+        }
+
+        // Checkbox durumu değiştiğinde tetiklenecek fonksiyon
+        function handleCheckboxChange() {
+            var checkboxValue = this.value;
+
+            if (!selectedOrders || !Array.isArray(selectedOrders)) {
+                selectedOrders = [];
+            }
+
+            if (this.checked) {
+                // Checkbox işaretlendiğinde
+                selectedOrders.push(checkboxValue);
+            } else {
+                // Checkbox işareti kaldırıldığında
+                var index = selectedOrders.indexOf(checkboxValue);
+                if (index !== -1) {
+                    selectedOrders.splice(index, 1);
+                }
+            }
+
+            // Cookie'deki selectedOrders'ı güncelle
+            setCookie('selectedOrders', JSON.stringify(selectedOrders), 365);
+        }
+
+        // Tüm checkbox'ları seç
+        var checkboxes = document.querySelectorAll('.form-check-input');
+
+        // Her bir checkbox'a change olay dinleyicisi ekleyin
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener('change', handleCheckboxChange);
+        });
+    });
+
+    // Cookie işlemleri için setCookie ve getCookie fonksiyonları
+    function setCookie(name, value) {
+
+        document.cookie = name + "=" + (value || "")  + "; path=/";
+    }
+
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    var results = '@ViewBag.Results';
+    if (results && results.trim() !== '')
+    {
+        alert(results);
+    }
+
+    var hataMesaji = '@ViewBag.Hata';
+    if (hataMesaji && hataMesaji.trim() !== '')
+    {
+        alert(hataMesaji);
+    }
+</script>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">

@@ -41,7 +41,7 @@ namespace WebApplication3.WEBAPIS
         public static string SuplierID = "106499";
         public static string Username = "IhcuViRpu2TeBeENvaxP";
         public static string Password = "cFoAzzK5I29UMKG5no7v";
-
+        //BUNLAR KİMİN BİLGİLERİ BİLMİOM Kİ YA
         public TrendyolApi()
         {
             Models.SaleChannels channel = appManager.SaleChannels.Where(s => s.SaleChannel == "Trendyol").FirstOrDefault();

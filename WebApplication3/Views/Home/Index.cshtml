@@ -1,53 +1,93 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿@using WebApplication3.Models
+@using WebApplication3.Models.ApiReturnTypes
+@using X.PagedList
+@using X.PagedList.Mvc
+@model IPagedList<WebApplication3.Models.ApiReturnTypes.GetAllOrders.ShipmentContent>
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
+<main class="container">
+    <section class="row mt-5" aria-labelledby="aspnetTitle">
+        <p class="lead">Tarih seçimi yapın</p>
     </section>
 
-    <div class="row">
-        <section class="col-md-6" aria-labelledby="gettingStartedTitle">
-            <label for="startDate">Başlangıç Zamanı:</label>
-            <input type="datetime-local" id="meeting-time" name="startDate" min="@DateTime.Now.AddMonths(-3).ToString("yyyy-MM-ddTHH:mm")" required>
-        </section>
-        <section class="col-md-6" aria-labelledby="librariesTitle">
-            <label for="endDate">Bitiş Tarihi:</label>
-            <input type="datetime-local" id="meeting-time" name="endDate" min="@DateTime.Now.AddMonths(-3).AddDays(1).ToString("yyyy-MM-ddTHH:mm")" max="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" required>
-        </section>
+    <form method="post" action="/Home/Index">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="startDate">Başlangıç Tarihi:</label>
+                    <input type="datetime-local" class="form-control" id="startDate" name="startDate" min="@DateTime.Now.AddMonths(-3).ToString("yyyy-MM-ddTHH:mm")" required>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="endDate">Bitiş Tarihi:</label>
+                    <input type="datetime-local" class="form-control" id="endDate" name="endDate" min="@DateTime.Now.AddMonths(-3).AddDays(1).ToString("yyyy-MM-ddTHH:mm")" max="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" required>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <br />
+                    <input id="getir" style="margin: 8px;" type="submit" class="btn btn-primary" value="Getir">
+                    <input id="getir" type="submit" class="btn btn-primary ml-auto" value="Otomatik Aktarımı Başlat">
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                @if (Model != null && Model.Any())
+                {
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Seç</th>
+                                        <th>Sipariş Numarası</th>
+                                        <th>Müşteri ID</th>
+                                        <th>Müşteri Adı</th>
+                                        <th>Müşteri Soyadı</th>
+                                        <th>Müşteri E-Posta</th>
+                                        <th>TC Numarası</th>
+                                        <th>Durum</th>
+                                        <th>Kargo Takip Numarası</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td><input class="form-check-input" type="checkbox" value="" style="margin-left: auto" id="flexCheckDefault"></td>
+                                            <td>@item.OrderNumber</td>
+                                            <td>@item.CustomerId</td>
+                                            <td>@item.CustomerFirstName</td>
+                                            <td>@item.CustomerLastName</td>
+                                            <td>@item.CustomerEmail</td>
+                                            <td>@item.TcIdentityNumber</td>
+                                            <td>@item.ShipmentPackageStatus</td>
+                                            <td>@item.CargoTrackingNumber</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center">
+                                @Html.PagedListPager((IPagedList)Model, page => Url.Action("PagedTable", new { page }), new X.PagedList.Web.Common.PagedListRenderOptionsBase
+                                {
+                                    LiElementClasses = new List<string> { "page-link" }
+                                })
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
 
 
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    </form>
+    <script>
+        
+    </script>
 
-
-
-
-    </div>
 </main>
 
-<script>
-    $(function () {
-        $(".datepicker").datepicker({
-            dateFormat: 'yy-mm-dd',
-            changeMonth: true,
-            changeYear: true,
-            yearRange: "-100:+0",
-            maxDate: '0' // Bugün ve sonrasını seçilemez yapar
-        });
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-        $("#startDate").on("change", function () {
-            var selectedStartDate = $("#startDate").datepicker("getDate");
-            $("#endDate").datepicker("option", "minDate", selectedStartDate);
-        });
-
-        $("#endDate").on("change", function () {
-            var selectedEndDate = $("#endDate").datepicker("getDate");
-            $("#startDate").datepicker("option", "maxDate", selectedEndDate);
-        });
-    });
-</script>

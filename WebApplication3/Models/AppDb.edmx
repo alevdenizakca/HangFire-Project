@@ -242,12 +242,6 @@ warning 6002: The table/view 'RGNOrderManagement_Test.dbo.CargoCityAndDistrictLi
           <Property Name="Desi" Type="float" Nullable="false" />
           <Property Name="PackageTrackingNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'RGNOrderManagement_Test.dbo.LocationBarkod' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="LocationBarkod">
-          <Property Name="Location" Type="nvarchar(max)" />
-          <Property Name="Barcode" Type="nvarchar" MaxLength="30" />
-        </EntityType>-->
         <EntityType Name="LocationCountingHeader">
           <Key>
             <PropertyRef Name="CountingHeaderID" />
@@ -340,7 +334,7 @@ warning 6013: The table/view 'RGNOrderManagement_Test.dbo.LocationBarkod' does n
           <Property Name="OrderDate" Type="date" Nullable="false" />
           <Property Name="OrderNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="ShipmentPackageStatus" Type="nvarchar" MaxLength="20" />
-          <Property Name="OrderStatus" Type="nvarchar" MaxLength="10" />
+          <Property Name="OrderStatus" Type="nvarchar" MaxLength="25" />
           <Property Name="CargoTrackingNumber" Type="nvarchar" MaxLength="100" />
           <Property Name="CargoTrackingLink" Type="nvarchar(max)" />
           <Property Name="CargoSenderNumber" Type="nvarchar" MaxLength="30" />
@@ -352,8 +346,8 @@ warning 6013: The table/view 'RGNOrderManagement_Test.dbo.LocationBarkod' does n
           <Property Name="TotalPrice" Type="money" Nullable="false" />
           <Property Name="ShipmentfirstName" Type="nvarchar" MaxLength="30" />
           <Property Name="ShipmentlastName" Type="nvarchar" MaxLength="30" />
-          <Property Name="Shipmentaddress1" Type="nvarchar" MaxLength="200" />
-          <Property Name="Shipmentaddress2" Type="nvarchar" MaxLength="200" />
+          <Property Name="Shipmentaddress1" Type="nvarchar" MaxLength="300" />
+          <Property Name="Shipmentaddress2" Type="nvarchar" MaxLength="300" />
           <Property Name="Shipmentcity" Type="nvarchar" MaxLength="100" />
           <Property Name="Shipmentdistrict" Type="nvarchar" MaxLength="100" />
           <Property Name="ShipmentpostalCode" Type="nvarchar" MaxLength="30" />
@@ -361,8 +355,8 @@ warning 6013: The table/view 'RGNOrderManagement_Test.dbo.LocationBarkod' does n
           <Property Name="InvoicefirstName" Type="nvarchar" MaxLength="30" />
           <Property Name="InvoicelastName" Type="nvarchar" MaxLength="30" />
           <Property Name="Invoicecompany" Type="nvarchar" MaxLength="100" />
-          <Property Name="Invoiceaddress1" Type="nvarchar" MaxLength="200" />
-          <Property Name="Invoiceaddress2" Type="nvarchar" MaxLength="200" />
+          <Property Name="Invoiceaddress1" Type="nvarchar" MaxLength="300" />
+          <Property Name="Invoiceaddress2" Type="nvarchar" MaxLength="300" />
           <Property Name="Invoicecity" Type="nvarchar" MaxLength="100" />
           <Property Name="Invoicedistrict" Type="nvarchar" MaxLength="100" />
           <Property Name="InvoicepostalCode" Type="nvarchar" MaxLength="30" />
@@ -943,15 +937,6 @@ warning 6002: The table/view 'RGNOrderManagement_Test.dbo.Tokens' does not have 
           <Property Name="IsECommerceWarehouse" Type="bit" Nullable="false" />
           <Property Name="IsCenterWarehouse" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'RGNOrderManagement_Test.dbo.zt_RGN_OrderManagementLineColumns' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="zt_RGN_OrderManagementLineColumns">
-          <Property Name="ColumnName" Type="nvarchar(max)" />
-          <Property Name="ColumnIndex" Type="int" />
-          <Property Name="ColumnValue" Type="nvarchar(max)" />
-          <Property Name="Visible" Type="bit" />
-          <Property Name="ColumnWidth" Type="int" />
-        </EntityType>-->
         <EntityType Name="zt_RGN_PackageToInvoiceStatus">
           <Key>
             <PropertyRef Name="RowID" />
@@ -1687,48 +1672,6 @@ warning 6002: The table/view 'RGNOrderManagement_Test.dbo.vw_WarehouseLocationWi
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="MarketPlaceExportOrderHeader">
-          <Key>
-            <PropertyRef Name="OrderHeaderID" />
-          </Key>
-          <Property Name="OrderHeaderID" Type="Guid" Nullable="false" />
-          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="OrderNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ShipmentPackageStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="OrderStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="CargoTrackingNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CargoTrackingLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CargoSenderNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CargoProviderName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="InvoiceLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="GrossAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="TotalDiscount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="TotalTyDiscount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="TotalPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="ShipmentfirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ShipmentlastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Shipmentaddress1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Shipmentaddress2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Shipmentcity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Shipmentdistrict" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ShipmentpostalCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ShipmentcountryCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="InvoicefirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="InvoicelastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Invoicecompany" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Invoiceaddress1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Invoiceaddress2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Invoicecity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Invoicedistrict" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="InvoicepostalCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="InvoicecountryCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CustomerFirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CustomerLastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CustomerEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CustomerPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MarketPlaceExportOrderPackageHistory" Relationship="Self.FK__MarketPla__Order__0524B3A7" FromRole="MarketPlaceExportOrderHeader" ToRole="MarketPlaceExportOrderPackageHistory" />
-          <NavigationProperty Name="MarketPlaceExportOrderLine" Relationship="Self.FK__MarketPla__Order__7F6BDA51" FromRole="MarketPlaceExportOrderHeader" ToRole="MarketPlaceExportOrderLine" />
-        </EntityType>
         <EntityType Name="MarketPlaceExportOrderLine">
           <Key>
             <PropertyRef Name="OrderLineID" />
@@ -1747,7 +1690,7 @@ warning 6002: The table/view 'RGNOrderManagement_Test.dbo.vw_WarehouseLocationWi
           <Property Name="lineItemPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="lineItemDiscount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="OrderHeaderID" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="MarketPlaceExportOrderHeader" Relationship="Self.FK__MarketPla__Order__7F6BDA51" FromRole="MarketPlaceExportOrderLine" ToRole="MarketPlaceExportOrderHeader" />
+          <NavigationProperty Name="MarketPlaceExportOrderHeader" Relationship="RGNOrderManagement_TestModel.FK__MarketPla__Order__7F6BDA51" FromRole="MarketPlaceExportOrderLine" ToRole="MarketPlaceExportOrderHeader" />
         </EntityType>
         <EntityType Name="MarketPlaceExportOrderPackageHistory">
           <Key>
@@ -1757,7 +1700,7 @@ warning 6002: The table/view 'RGNOrderManagement_Test.dbo.vw_WarehouseLocationWi
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="OrderHeaderID" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="MarketPlaceExportOrderHeader" Relationship="Self.FK__MarketPla__Order__0524B3A7" FromRole="MarketPlaceExportOrderPackageHistory" ToRole="MarketPlaceExportOrderHeader" />
+          <NavigationProperty Name="MarketPlaceExportOrderHeader" Relationship="RGNOrderManagement_TestModel.FK__MarketPla__Order__0524B3A7" FromRole="MarketPlaceExportOrderPackageHistory" ToRole="MarketPlaceExportOrderHeader" />
         </EntityType>
         <EntityType Name="NebimParameters">
           <Key>
@@ -2205,28 +2148,6 @@ warning 6002: The table/view 'RGNOrderManagement_Test.dbo.vw_WarehouseLocationWi
           <Property Name="LocationGroupCode" Type="Int32" Nullable="false" />
           <Property Name="WarehouseCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Users">
-          <Key>
-            <PropertyRef Name="RowGuid" />
-          </Key>
-          <Property Name="RowGuid" Type="Guid" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Terminal" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PrinterType" Type="Byte" Nullable="false" />
-          <Property Name="IsPrintInvoice" Type="Boolean" Nullable="false" />
-          <Property Name="IsPrintCargo" Type="Boolean" Nullable="false" />
-          <Property Name="UserPrinter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserCargoPrinter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="GroupType" Type="Int32" />
-          <Property Name="IsPackageUser" Type="Boolean" Nullable="false" />
-          <Property Name="IsAdminUser" Type="Boolean" Nullable="false" />
-          <Property Name="IsPickingUser" Type="Boolean" Nullable="false" />
-          <Property Name="Role" Type="Int32" />
-          <Property Name="IsOrderManagementUser" Type="Boolean" Nullable="false" />
-          <Property Name="IsShipmentManagementUser" Type="Boolean" Nullable="false" />
-          <Property Name="IsPurchaseManagementUser" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="Vehicle">
           <Key>
             <PropertyRef Name="VehicleCode" />
@@ -2511,30 +2432,6 @@ warning 6002: The table/view 'RGNOrderManagement_Test.dbo.vw_WarehouseLocationWi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MarketPla__Order__0524B3A7">
-          <End Role="MarketPlaceExportOrderHeader" Type="Self.MarketPlaceExportOrderHeader" Multiplicity="1" />
-          <End Role="MarketPlaceExportOrderPackageHistory" Type="Self.MarketPlaceExportOrderPackageHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MarketPlaceExportOrderHeader">
-              <PropertyRef Name="OrderHeaderID" />
-            </Principal>
-            <Dependent Role="MarketPlaceExportOrderPackageHistory">
-              <PropertyRef Name="OrderHeaderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MarketPla__Order__7F6BDA51">
-          <End Role="MarketPlaceExportOrderHeader" Type="Self.MarketPlaceExportOrderHeader" Multiplicity="1" />
-          <End Role="MarketPlaceExportOrderLine" Type="Self.MarketPlaceExportOrderLine" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MarketPlaceExportOrderHeader">
-              <PropertyRef Name="OrderHeaderID" />
-            </Principal>
-            <Dependent Role="MarketPlaceExportOrderLine">
-              <PropertyRef Name="OrderHeaderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="AppManagement" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="AddProductLocation" EntityType="Self.AddProductLocation" />
@@ -2558,7 +2455,6 @@ warning 6002: The table/view 'RGNOrderManagement_Test.dbo.vw_WarehouseLocationWi
           <EntitySet Name="LocationLevelNames" EntityType="Self.LocationLevelNames" />
           <EntitySet Name="LocationParameters" EntityType="Self.LocationParameters" />
           <EntitySet Name="Logger" EntityType="Self.Logger" />
-          <EntitySet Name="MarketPlaceExportOrderHeader" EntityType="Self.MarketPlaceExportOrderHeader" />
           <EntitySet Name="MarketPlaceExportOrderLine" EntityType="Self.MarketPlaceExportOrderLine" />
           <EntitySet Name="MarketPlaceExportOrderPackageHistory" EntityType="Self.MarketPlaceExportOrderPackageHistory" />
           <EntitySet Name="NebimParameters" EntityType="Self.NebimParameters" />
@@ -2590,7 +2486,6 @@ warning 6002: The table/view 'RGNOrderManagement_Test.dbo.vw_WarehouseLocationWi
           <EntitySet Name="TransactionType" EntityType="Self.TransactionType" />
           <EntitySet Name="TransType" EntityType="Self.TransType" />
           <EntitySet Name="UserProductGroups" EntityType="Self.UserProductGroups" />
-          <EntitySet Name="Users" EntityType="Self.Users" />
           <EntitySet Name="Vehicle" EntityType="Self.Vehicle" />
           <EntitySet Name="WarehouseLocationDefinition" EntityType="Self.WarehouseLocationDefinition" />
           <EntitySet Name="WarehouseLocationERP" EntityType="Self.WarehouseLocationERP" />
@@ -2627,14 +2522,6 @@ warning 6002: The table/view 'RGNOrderManagement_Test.dbo.vw_WarehouseLocationWi
             <End Role="TransType" EntitySet="TransType" />
             <End Role="DraftStockTransaction" EntitySet="DraftStockTransaction" />
           </AssociationSet>
-          <AssociationSet Name="FK__MarketPla__Order__0524B3A7" Association="Self.FK__MarketPla__Order__0524B3A7">
-            <End Role="MarketPlaceExportOrderHeader" EntitySet="MarketPlaceExportOrderHeader" />
-            <End Role="MarketPlaceExportOrderPackageHistory" EntitySet="MarketPlaceExportOrderPackageHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MarketPla__Order__7F6BDA51" Association="Self.FK__MarketPla__Order__7F6BDA51">
-            <End Role="MarketPlaceExportOrderHeader" EntitySet="MarketPlaceExportOrderHeader" />
-            <End Role="MarketPlaceExportOrderLine" EntitySet="MarketPlaceExportOrderLine" />
-          </AssociationSet>
           <FunctionImport Name="sp_GetWarehouseLocationID" ReturnType="Collection(RGNOrderManagement_TestModel.sp_GetWarehouseLocationID_Result)">
           <Parameter Name="LocationCode" Mode="In" Type="String" />
           </FunctionImport>
@@ -2659,7 +2546,17 @@ warning 6002: The table/view 'RGNOrderManagement_Test.dbo.vw_WarehouseLocationWi
             <End Role="ReportQueries" EntitySet="ReportQueries" />
             <End Role="ReportParameters" EntitySet="ReportParameters" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Users" EntityType="RGNOrderManagement_TestModel.Users" />
+          <EntitySet Name="MarketPlaceExportOrderHeader" EntityType="RGNOrderManagement_TestModel.MarketPlaceExportOrderHeader" />
+          <AssociationSet Name="FK__MarketPla__Order__0524B3A7" Association="RGNOrderManagement_TestModel.FK__MarketPla__Order__0524B3A7">
+            <End Role="MarketPlaceExportOrderHeader" EntitySet="MarketPlaceExportOrderHeader" />
+            <End Role="MarketPlaceExportOrderPackageHistory" EntitySet="MarketPlaceExportOrderPackageHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MarketPla__Order__7F6BDA51" Association="RGNOrderManagement_TestModel.FK__MarketPla__Order__7F6BDA51">
+            <End Role="MarketPlaceExportOrderHeader" EntitySet="MarketPlaceExportOrderHeader" />
+            <End Role="MarketPlaceExportOrderLine" EntitySet="MarketPlaceExportOrderLine" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="sp_GetWarehouseLocationID_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Int32" Name="GroupID" Nullable="false" />
@@ -2725,7 +2622,95 @@ warning 6002: The table/view 'RGNOrderManagement_Test.dbo.vw_WarehouseLocationWi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="RowGuid" />
+          </Key>
+          <Property Name="RowGuid" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Terminal" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PrinterType" Type="Byte" Nullable="false" />
+          <Property Name="IsPrintInvoice" Type="Boolean" Nullable="false" />
+          <Property Name="IsPrintCargo" Type="Boolean" Nullable="false" />
+          <Property Name="UserPrinter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserCargoPrinter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GroupType" Type="Int32" />
+          <Property Name="IsPackageUser" Type="Boolean" Nullable="false" />
+          <Property Name="IsAdminUser" Type="Boolean" Nullable="false" />
+          <Property Name="IsPickingUser" Type="Boolean" Nullable="false" />
+          <Property Name="Role" Type="Int32" />
+          <Property Name="IsOrderManagementUser" Type="Boolean" Nullable="false" />
+          <Property Name="IsShipmentManagementUser" Type="Boolean" Nullable="false" />
+          <Property Name="IsPurchaseManagementUser" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MarketPlaceExportOrderHeader">
+          <Key>
+            <PropertyRef Name="OrderHeaderID" />
+          </Key>
+          <Property Name="OrderHeaderID" Type="Guid" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OrderNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ShipmentPackageStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OrderStatus" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="CargoTrackingNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CargoTrackingLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CargoSenderNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CargoProviderName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GrossAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="TotalDiscount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalTyDiscount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ShipmentfirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ShipmentlastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Shipmentaddress1" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Shipmentaddress2" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Shipmentcity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Shipmentdistrict" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ShipmentpostalCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ShipmentcountryCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="InvoicefirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="InvoicelastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Invoicecompany" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Invoiceaddress1" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Invoiceaddress2" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Invoicecity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Invoicedistrict" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InvoicepostalCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="InvoicecountryCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerFirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerLastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MarketPlaceExportOrderPackageHistory" Relationship="RGNOrderManagement_TestModel.FK__MarketPla__Order__0524B3A7" FromRole="MarketPlaceExportOrderHeader" ToRole="MarketPlaceExportOrderPackageHistory" />
+          <NavigationProperty Name="MarketPlaceExportOrderLine" Relationship="RGNOrderManagement_TestModel.FK__MarketPla__Order__7F6BDA51" FromRole="MarketPlaceExportOrderHeader" ToRole="MarketPlaceExportOrderLine" />
+        </EntityType>
+        <Association Name="FK__MarketPla__Order__0524B3A7">
+          <End Type="RGNOrderManagement_TestModel.MarketPlaceExportOrderHeader" Role="MarketPlaceExportOrderHeader" Multiplicity="1" />
+          <End Type="RGNOrderManagement_TestModel.MarketPlaceExportOrderPackageHistory" Role="MarketPlaceExportOrderPackageHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MarketPlaceExportOrderHeader">
+              <PropertyRef Name="OrderHeaderID" />
+            </Principal>
+            <Dependent Role="MarketPlaceExportOrderPackageHistory">
+              <PropertyRef Name="OrderHeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MarketPla__Order__7F6BDA51">
+          <End Type="RGNOrderManagement_TestModel.MarketPlaceExportOrderHeader" Role="MarketPlaceExportOrderHeader" Multiplicity="1" />
+          <End Type="RGNOrderManagement_TestModel.MarketPlaceExportOrderLine" Role="MarketPlaceExportOrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MarketPlaceExportOrderHeader">
+              <PropertyRef Name="OrderHeaderID" />
+            </Principal>
+            <Dependent Role="MarketPlaceExportOrderLine">
+              <PropertyRef Name="OrderHeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -3052,47 +3037,6 @@ warning 6002: The table/view 'RGNOrderManagement_Test.dbo.vw_WarehouseLocationWi
                 <ScalarProperty Name="RowID" ColumnName="RowID" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MarketPlaceExportOrderHeader">
-            <EntityTypeMapping TypeName="RGNOrderManagement_TestModel.MarketPlaceExportOrderHeader">
-              <MappingFragment StoreEntitySet="MarketPlaceExportOrderHeader">
-                <ScalarProperty Name="OrderHeaderID" ColumnName="OrderHeaderID" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
-                <ScalarProperty Name="ShipmentPackageStatus" ColumnName="ShipmentPackageStatus" />
-                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
-                <ScalarProperty Name="CargoTrackingNumber" ColumnName="CargoTrackingNumber" />
-                <ScalarProperty Name="CargoTrackingLink" ColumnName="CargoTrackingLink" />
-                <ScalarProperty Name="CargoSenderNumber" ColumnName="CargoSenderNumber" />
-                <ScalarProperty Name="CargoProviderName" ColumnName="CargoProviderName" />
-                <ScalarProperty Name="InvoiceLink" ColumnName="InvoiceLink" />
-                <ScalarProperty Name="GrossAmount" ColumnName="GrossAmount" />
-                <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
-                <ScalarProperty Name="TotalTyDiscount" ColumnName="TotalTyDiscount" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="ShipmentfirstName" ColumnName="ShipmentfirstName" />
-                <ScalarProperty Name="ShipmentlastName" ColumnName="ShipmentlastName" />
-                <ScalarProperty Name="Shipmentaddress1" ColumnName="Shipmentaddress1" />
-                <ScalarProperty Name="Shipmentaddress2" ColumnName="Shipmentaddress2" />
-                <ScalarProperty Name="Shipmentcity" ColumnName="Shipmentcity" />
-                <ScalarProperty Name="Shipmentdistrict" ColumnName="Shipmentdistrict" />
-                <ScalarProperty Name="ShipmentpostalCode" ColumnName="ShipmentpostalCode" />
-                <ScalarProperty Name="ShipmentcountryCode" ColumnName="ShipmentcountryCode" />
-                <ScalarProperty Name="InvoicefirstName" ColumnName="InvoicefirstName" />
-                <ScalarProperty Name="InvoicelastName" ColumnName="InvoicelastName" />
-                <ScalarProperty Name="Invoicecompany" ColumnName="Invoicecompany" />
-                <ScalarProperty Name="Invoiceaddress1" ColumnName="Invoiceaddress1" />
-                <ScalarProperty Name="Invoiceaddress2" ColumnName="Invoiceaddress2" />
-                <ScalarProperty Name="Invoicecity" ColumnName="Invoicecity" />
-                <ScalarProperty Name="Invoicedistrict" ColumnName="Invoicedistrict" />
-                <ScalarProperty Name="InvoicepostalCode" ColumnName="InvoicepostalCode" />
-                <ScalarProperty Name="InvoicecountryCode" ColumnName="InvoicecountryCode" />
-                <ScalarProperty Name="CustomerFirstName" ColumnName="CustomerFirstName" />
-                <ScalarProperty Name="CustomerLastName" ColumnName="CustomerLastName" />
-                <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
-                <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3599,29 +3543,6 @@ warning 6002: The table/view 'RGNOrderManagement_Test.dbo.vw_WarehouseLocationWi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="RGNOrderManagement_TestModel.Users">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="RowGuid" ColumnName="RowGuid" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Terminal" ColumnName="Terminal" />
-                <ScalarProperty Name="PrinterType" ColumnName="PrinterType" />
-                <ScalarProperty Name="IsPrintInvoice" ColumnName="IsPrintInvoice" />
-                <ScalarProperty Name="IsPrintCargo" ColumnName="IsPrintCargo" />
-                <ScalarProperty Name="UserPrinter" ColumnName="UserPrinter" />
-                <ScalarProperty Name="UserCargoPrinter" ColumnName="UserCargoPrinter" />
-                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
-                <ScalarProperty Name="IsPackageUser" ColumnName="IsPackageUser" />
-                <ScalarProperty Name="IsAdminUser" ColumnName="IsAdminUser" />
-                <ScalarProperty Name="IsPickingUser" ColumnName="IsPickingUser" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="IsOrderManagementUser" ColumnName="IsOrderManagementUser" />
-                <ScalarProperty Name="IsShipmentManagementUser" ColumnName="IsShipmentManagementUser" />
-                <ScalarProperty Name="IsPurchaseManagementUser" ColumnName="IsPurchaseManagementUser" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Vehicle">
             <EntityTypeMapping TypeName="RGNOrderManagement_TestModel.Vehicle">
               <MappingFragment StoreEntitySet="Vehicle">
@@ -3918,6 +3839,70 @@ warning 6002: The table/view 'RGNOrderManagement_Test.dbo.vw_WarehouseLocationWi
                 <ScalarProperty Name="QueryText" ColumnName="QueryText" />
                 <ScalarProperty Name="QueryName" ColumnName="QueryName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="RGNOrderManagement_TestModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IsPurchaseManagementUser" ColumnName="IsPurchaseManagementUser" />
+                <ScalarProperty Name="IsShipmentManagementUser" ColumnName="IsShipmentManagementUser" />
+                <ScalarProperty Name="IsOrderManagementUser" ColumnName="IsOrderManagementUser" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="IsPickingUser" ColumnName="IsPickingUser" />
+                <ScalarProperty Name="IsAdminUser" ColumnName="IsAdminUser" />
+                <ScalarProperty Name="IsPackageUser" ColumnName="IsPackageUser" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="UserCargoPrinter" ColumnName="UserCargoPrinter" />
+                <ScalarProperty Name="UserPrinter" ColumnName="UserPrinter" />
+                <ScalarProperty Name="IsPrintCargo" ColumnName="IsPrintCargo" />
+                <ScalarProperty Name="IsPrintInvoice" ColumnName="IsPrintInvoice" />
+                <ScalarProperty Name="PrinterType" ColumnName="PrinterType" />
+                <ScalarProperty Name="Terminal" ColumnName="Terminal" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RowGuid" ColumnName="RowGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarketPlaceExportOrderHeader">
+            <EntityTypeMapping TypeName="RGNOrderManagement_TestModel.MarketPlaceExportOrderHeader">
+              <MappingFragment StoreEntitySet="MarketPlaceExportOrderHeader">
+                <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />
+                <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
+                <ScalarProperty Name="CustomerLastName" ColumnName="CustomerLastName" />
+                <ScalarProperty Name="CustomerFirstName" ColumnName="CustomerFirstName" />
+                <ScalarProperty Name="InvoicecountryCode" ColumnName="InvoicecountryCode" />
+                <ScalarProperty Name="InvoicepostalCode" ColumnName="InvoicepostalCode" />
+                <ScalarProperty Name="Invoicedistrict" ColumnName="Invoicedistrict" />
+                <ScalarProperty Name="Invoicecity" ColumnName="Invoicecity" />
+                <ScalarProperty Name="Invoiceaddress2" ColumnName="Invoiceaddress2" />
+                <ScalarProperty Name="Invoiceaddress1" ColumnName="Invoiceaddress1" />
+                <ScalarProperty Name="Invoicecompany" ColumnName="Invoicecompany" />
+                <ScalarProperty Name="InvoicelastName" ColumnName="InvoicelastName" />
+                <ScalarProperty Name="InvoicefirstName" ColumnName="InvoicefirstName" />
+                <ScalarProperty Name="ShipmentcountryCode" ColumnName="ShipmentcountryCode" />
+                <ScalarProperty Name="ShipmentpostalCode" ColumnName="ShipmentpostalCode" />
+                <ScalarProperty Name="Shipmentdistrict" ColumnName="Shipmentdistrict" />
+                <ScalarProperty Name="Shipmentcity" ColumnName="Shipmentcity" />
+                <ScalarProperty Name="Shipmentaddress2" ColumnName="Shipmentaddress2" />
+                <ScalarProperty Name="Shipmentaddress1" ColumnName="Shipmentaddress1" />
+                <ScalarProperty Name="ShipmentlastName" ColumnName="ShipmentlastName" />
+                <ScalarProperty Name="ShipmentfirstName" ColumnName="ShipmentfirstName" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="TotalTyDiscount" ColumnName="TotalTyDiscount" />
+                <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
+                <ScalarProperty Name="GrossAmount" ColumnName="GrossAmount" />
+                <ScalarProperty Name="InvoiceLink" ColumnName="InvoiceLink" />
+                <ScalarProperty Name="CargoProviderName" ColumnName="CargoProviderName" />
+                <ScalarProperty Name="CargoSenderNumber" ColumnName="CargoSenderNumber" />
+                <ScalarProperty Name="CargoTrackingLink" ColumnName="CargoTrackingLink" />
+                <ScalarProperty Name="CargoTrackingNumber" ColumnName="CargoTrackingNumber" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="ShipmentPackageStatus" ColumnName="ShipmentPackageStatus" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="OrderHeaderID" ColumnName="OrderHeaderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
