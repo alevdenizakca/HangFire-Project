@@ -28,6 +28,7 @@ namespace WebApplication3
             RecurringJob.AddOrUpdate<SchedulerController>(x => x.RunSchedulerMethod(), "*/5 * * * *");
             
             app.UseHangfireServer();
+            app.UseHangfireDashboard();
         }
     }
 }
